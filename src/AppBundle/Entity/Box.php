@@ -38,9 +38,9 @@ class Box
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-    private $adresse;
+    private $address;
 
     /**
      * @var string
@@ -137,27 +137,27 @@ class Box
     }
 
     /**
-     * Set adresse
+     * Set address
      *
-     * @param string $adresse
+     * @param string $address
      *
      * @return Box
      */
-    public function setAdresse($adresse)
+    public function setAddress($address)
     {
-        $this->adresse = $adresse;
+        $this->address = $address;
 
         return $this;
     }
 
     /**
-     * Get adresse
+     * Get address
      *
      * @return string
      */
-    public function getAdresse()
+    public function getAddress()
     {
-        return $this->adresse;
+        return $this->address;
     }
 
     /**

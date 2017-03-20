@@ -25,9 +25,9 @@ class Book {
     /**
      * @var string
      *
-     * @ORM\Column(name="titre", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    private $titre;
+    private $title;
 
     /**
      * @var string
@@ -94,28 +94,6 @@ class Book {
      */
     public function getId() {
         return $this->id;
-    }
-
-    /**
-     * Set titre
-     *
-     * @param string $titre
-     *
-     * @return Book
-     */
-    public function setTitre($titre) {
-        $this->titre = $titre;
-
-        return $this;
-    }
-
-    /**
-     * Get titre
-     *
-     * @return string
-     */
-    public function getTitre() {
-        return $this->titre;
     }
 
     /**
@@ -333,4 +311,28 @@ class Book {
         $this->updatedAt = new \DateTime();
     }
 
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Book
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 }
