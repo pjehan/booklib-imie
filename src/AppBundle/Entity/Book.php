@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="book")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BookRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Book {
 
@@ -70,7 +71,7 @@ class Book {
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
-    
+
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      * 
@@ -78,7 +79,7 @@ class Book {
      * @ORM\JoinTable(name="books_categories")
      */
     private $categories;
-    
+
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      * 
@@ -227,7 +228,6 @@ class Book {
         return $this->updatedAt;
     }
 
-
     /**
      * Set author
      *
@@ -235,8 +235,7 @@ class Book {
      *
      * @return Book
      */
-    public function setAuthor(\AppBundle\Entity\Author $author = null)
-    {
+    public function setAuthor(\AppBundle\Entity\Author $author = null) {
         $this->author = $author;
 
         return $this;
@@ -247,15 +246,14 @@ class Book {
      *
      * @return \AppBundle\Entity\Author
      */
-    public function getAuthor()
-    {
+    public function getAuthor() {
         return $this->author;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -266,8 +264,7 @@ class Book {
      *
      * @return Book
      */
-    public function addCategory(\AppBundle\Entity\Category $category)
-    {
+    public function addCategory(\AppBundle\Entity\Category $category) {
         $this->categories[] = $category;
 
         return $this;
@@ -278,8 +275,7 @@ class Book {
      *
      * @param \AppBundle\Entity\Category $category
      */
-    public function removeCategory(\AppBundle\Entity\Category $category)
-    {
+    public function removeCategory(\AppBundle\Entity\Category $category) {
         $this->categories->removeElement($category);
     }
 
@@ -288,8 +284,7 @@ class Book {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCategories()
-    {
+    public function getCategories() {
         return $this->categories;
     }
 
@@ -300,8 +295,7 @@ class Book {
      *
      * @return Book
      */
-    public function addBorrow(\AppBundle\Entity\Borrow $borrow)
-    {
+    public function addBorrow(\AppBundle\Entity\Borrow $borrow) {
         $this->borrows[] = $borrow;
 
         return $this;
@@ -312,8 +306,7 @@ class Book {
      *
      * @param \AppBundle\Entity\Borrow $borrow
      */
-    public function removeBorrow(\AppBundle\Entity\Borrow $borrow)
-    {
+    public function removeBorrow(\AppBundle\Entity\Borrow $borrow) {
         $this->borrows->removeElement($borrow);
     }
 
@@ -322,8 +315,22 @@ class Book {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBorrows()
-    {
+    public function getBorrows() {
         return $this->borrows;
     }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue() {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+        $this->updatedAt = new \DateTime();
+    }
+
 }
