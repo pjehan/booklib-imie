@@ -15,7 +15,7 @@ class BookRepository extends \Doctrine\ORM\EntityRepository {
                         ->createQueryBuilder()
                         ->select('b')
                         ->from('AppBundle:Book', 'b')
-                        ->orderBy('b.createdAt', 'DESC')
+                        ->orderBy('b.title', 'ASC')
                         ->setMaxResults($limit)
                         ->getQuery()
                         ->getResult()

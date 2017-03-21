@@ -49,18 +49,7 @@
                 <div class="row">
                     {% for book in lastBooks %}
                         <div class="col-sm-6 col-md-4">
-                            <div class="thumbnail">
-                                <img src="uploads/{{ book.image }}" alt="Harry Potter et la coupe de feu">
-                                <div class="caption">
-                                    <h3>{{ book.title }}</h3>
-                                    <div class="book-infos">
-                                        <span class="label label-info"><i class="fa fa-user"></i> {{ book.author.fullname }}</span>
-                                        <span class="label label-success"><i class="fa fa-tag"></i> Roman</span>
-                                        <span class="label label-success"><i class="fa fa-tag"></i> Fantastique</span>
-                                    </div>
-                                    <p><a href="#" class="btn btn-primary" role="button"><i class="fa fa-eye"></i> Voir plus</a></p>
-                                </div>
-                            </div>
+                            {% include 'book/_book_thumbnail.html.twig' with {'book': book} %}
                         </div>
                     {% endfor %}
                 </div>
