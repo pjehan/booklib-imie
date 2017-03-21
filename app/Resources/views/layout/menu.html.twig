@@ -1,11 +1,16 @@
 <ul class="nav navbar-nav">
-    <li class="active"><a href="#">Accueil</a></li>
+    <li class="{% if route == 'homepage' %}active{% endif %}"><a href="{{ path('homepage') }}">Accueil</a></li>
     <li><a href="#">Concept</a></li>
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catégories <span class="caret"></span></a>
         <ul class="dropdown-menu">
-            {% for category in categories %}
-                <li><a href="#">{{ category.name }}</a></li>
+            {% for item in categories %}
+                <li>
+                    <a href="{{ path('show_category', {'id': item.category.id}) }}">
+                        {{ item.category.name }}
+                        <label class="label label-info pull-right">{{ item.count_books }}</label>
+                    </a>
+                </li>
             {% endfor %}
         </ul>
     </li>

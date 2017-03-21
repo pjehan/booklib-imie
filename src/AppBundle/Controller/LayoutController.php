@@ -7,14 +7,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class LayoutController extends Controller
 {
-    /**
-     * @Route("/menu")
-     */
-    public function menuAction()
+    
+    public function menuAction($route)
     {
-        $categories = $this->getDoctrine()->getRepository("AppBundle:Category")->findAll();
+        $categories = $this->getDoctrine()->getRepository("AppBundle:Category")->findWithCount();
         
         return $this->render('layout/menu.html.twig', array(
+            "route" => $route,
             "categories" => $categories
         ));
     }

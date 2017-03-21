@@ -21,4 +21,23 @@ class DefaultController extends Controller
             "lastBooks" => $lastBooks
         ]);
     }
+    
+    /**
+     * @Route("/book/{id}", name="show_book")
+     */
+    public function showBookAction(\AppBundle\Entity\Book $book) {
+        return $this->render('book/show.html.twig', [
+            "book" => $book
+        ]);
+    }
+    
+    /**
+     * @Route("/category/{id}", name="show_category")
+     */
+    public function showCategoryAction(\AppBundle\Entity\Category $category) {
+        return $this->render('category/show.html.twig', [
+            "category" => $category
+        ]);
+    }
+    
 }

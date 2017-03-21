@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ category.name }}
+{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+
+        <h1>{{ category.name }} ({{ category.books|length }})</h1>
+
+        <div class="row">
+            {% for book in category.books %}
+                <div class="col-sm-6 col-md-4">
+                    {% include 'book/_book_thumbnail.html.twig' with {'book': book} %}
+                </div>
+            {% else %}
+                Aucun livre dans la catégorie {{ category.name }} !
+            {% endfor %}
+        </div>
+
+    </section>
+
+{% endblock %}

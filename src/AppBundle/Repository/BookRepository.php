@@ -13,9 +13,10 @@ class BookRepository extends \Doctrine\ORM\EntityRepository {
     public function findLast($limit) {
         return $this->getEntityManager()
                         ->createQueryBuilder()
-                        ->select('b')
+                        ->select('b', 'a')
                         ->from('AppBundle:Book', 'b')
-                        ->orderBy('b.title', 'ASC')
+                        ->innerJoin('b.author', 'a')
+                        ->orderBy('b.createdAt', 'DESC')
                         ->setMaxResults($limit)
                         ->getQuery()
                         ->getResult()
