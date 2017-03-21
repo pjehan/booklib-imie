@@ -13,9 +13,12 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
+        $categories = $this->getDoctrine()->getRepository("AppBundle:Category")->findAll();
+        $lastBooks = $this->getDoctrine()->getRepository("AppBundle:Book")->findLast(3);
+        
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+            "categories" => $categories,
+            "lastBooks" => $lastBooks
         ]);
     }
 }

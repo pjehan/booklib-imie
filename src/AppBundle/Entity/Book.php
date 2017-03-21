@@ -83,7 +83,7 @@ class Book {
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      * 
-     * @ORM\OneToMany(targetEntity="Borrow", mappedBy="books")
+     * @ORM\OneToMany(targetEntity="Borrow", mappedBy="book")
      */
     private $borrows;
 

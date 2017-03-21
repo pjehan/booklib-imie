@@ -2,12 +2,92 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        {% block header %}
+            <header class="container">
+                <nav class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-book fa-green fa-stack-1x"></i>
+                                </span>
+                                BookLib
+                            </a>
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            {{ render(controller('AppBundle:Layout:menu')) }}
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-user fa-green fa-stack-1x"></i>
+                                        </span>
+                                        Mon Compte
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-sign-in"></i>
+                                                Se connecter
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-user-plus"></i>
+                                                Créer un compte
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+            </header>
+        {% endblock %}
+
+        <main>
+            {% block body %}
+                <!-- Chargé depuis les templates enfants -->
+            {% endblock %}
+        </main>
+
+        {% block footer %}
+            <footer class="site-footer">
+                <i class="fa fa-copyright"></i> BookLib 2017
+            </footer>
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="{{ asset('assets/jquery/jquery.min.js') }}"></script>
+            <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('assets/googlemap/markercluster.js') }}"></script>
+            <script src="{{ asset('js/script.js') }}"></script>
+
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrJIIV0nvzIRA3QqNc4CpXLAq5XaQEJ_Q&callback=initBooksMap"></script>
+
+        {% endblock %}
     </body>
 </html>

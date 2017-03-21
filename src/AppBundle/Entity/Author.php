@@ -141,4 +141,8 @@ class Author
     {
         return $this->books;
     }
+    
+    public function getFullname () {
+        return $this->firstname . ' ' . $this->lastname;
+    }
 }

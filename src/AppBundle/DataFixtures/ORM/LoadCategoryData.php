@@ -14,7 +14,8 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
             "roman" => "Roman",
             "sf" => "SF",
             "histoire" => "Histoire",
-            "thriller" => "Thriller"
+            "thriller" => "Thriller",
+            "bd" => "BD"
         );
 
         foreach ($categories as $key => $category) {

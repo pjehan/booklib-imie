@@ -1,0 +1,59 @@
+body {
+    padding-top: 63px;
+}
+
+header .navbar-inverse a.navbar-brand {
+    padding: 6px;
+    color: #325d88;
+}
+
+header .navbar-inverse a.navbar-brand:hover {
+    color: #244363;
+}
+
+.fa.fa-green {
+    color: #93c54b;
+}
+
+.header-home {
+    background-image: url('../images/header_home.jpg');
+    background-size: cover;
+    min-height: 500px;
+    margin-bottom: 20px;
+}
+
+.header-home .jumbotron {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(248, 245, 240, 0.4);
+}
+
+footer.site-footer {
+    padding: 40px 0;
+    color: #999;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: 1px solid #e5e5e5;
+    margin-top: 40px;
+}
+
+.last-books .thumbnail {
+    height: 450px;
+}
+
+.last-books .thumbnail img {
+    height: 250px;
+}
+
+.last-books .thumbnail h3 {
+    font-size: 20px;
+}
+
+.last-books .thumbnail .book-infos {
+    margin-bottom: 10px;
+}
+
+#map-books {
+    height: 400px;
+    width: 100%;
+}
