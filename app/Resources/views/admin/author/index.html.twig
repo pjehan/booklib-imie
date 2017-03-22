@@ -1,0 +1,45 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block body %}
+    <div class="container">
+
+        <h1>Authors list</h1>
+
+
+        <a href="{{ path('author_new') }}" class="btn btn-primary">
+            <i class="fa fa-plus-circle"></i> 
+            Ajouter
+        </a>
+
+        <table class="table table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for author in authors %}
+                    <tr>
+                        <td><a href="{{ path('author_show', { 'id': author.id }) }}">{{ author.id }}</a></td>
+                        <td>{{ author.firstname }}</td>
+                        <td>{{ author.lastname }}</td>
+                        <td>
+                            <a href="{{ path('author_show', { 'id': author.id }) }}" class="btn btn-default">
+                                <i class="fa fa-eye"></i>
+                                Afficher
+                            </a>
+                            <a href="{{ path('author_edit', { 'id': author.id }) }}" class="btn btn-primary">
+                                <i class="fa fa-edit"></i> 
+                                Modifier
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}
