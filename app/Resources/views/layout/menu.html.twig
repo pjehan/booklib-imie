@@ -8,7 +8,7 @@
                 <li>
                     <a href="{{ path('show_category', {'id': item.category.id}) }}">
                         {{ item.category.name }}
-                        <label class="label label-info pull-right">{{ item.count_books }}</label>
+                        <label class="badge pull-right">{{ item.count_books }}</label>
                     </a>
                 </li>
             {% endfor %}
