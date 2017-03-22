@@ -4,14 +4,16 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User
-{
+class User implements UserInterface{
+
     /**
      * @var int
      *
@@ -55,7 +57,14 @@ class User
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
-    
+
+    /**
+     * @var array
+     * 
+     * @ORM\Column(type="json_array")
+     */
+    private $roles = [];
+
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      * 
@@ -63,14 +72,12 @@ class User
      */
     private $borrows;
 
-
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -81,8 +88,7 @@ class User
      *
      * @return User
      */
-    public function setFirstname($firstname)
-    {
+    public function setFirstname($firstname) {
         $this->firstname = $firstname;
 
         return $this;
@@ -93,8 +99,7 @@ class User
      *
      * @return string
      */
-    public function getFirstname()
-    {
+    public function getFirstname() {
         return $this->firstname;
     }
 
@@ -105,8 +110,7 @@ class User
      *
      * @return User
      */
-    public function setLastname($lastname)
-    {
+    public function setLastname($lastname) {
         $this->lastname = $lastname;
 
         return $this;
@@ -117,8 +121,7 @@ class User
      *
      * @return string
      */
-    public function getLastname()
-    {
+    public function getLastname() {
         return $this->lastname;
     }
 
@@ -129,8 +132,7 @@ class User
      *
      * @return User
      */
-    public function setUsername($username)
-    {
+    public function setUsername($username) {
         $this->username = $username;
 
         return $this;
@@ -141,8 +143,7 @@ class User
      *
      * @return string
      */
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
@@ -153,8 +154,7 @@ class User
      *
      * @return User
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
         return $this;
@@ -165,8 +165,7 @@ class User
      *
      * @return string
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -177,8 +176,7 @@ class User
      *
      * @return User
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -189,15 +187,14 @@ class User
      *
      * @return string
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->borrows = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -208,8 +205,7 @@ class User
      *
      * @return User
      */
-    public function addBorrow(\AppBundle\Entity\Borrow $borrow)
-    {
+    public function addBorrow(\AppBundle\Entity\Borrow $borrow) {
         $this->borrows[] = $borrow;
 
         return $this;
@@ -220,8 +216,7 @@ class User
      *
      * @param \AppBundle\Entity\Borrow $borrow
      */
-    public function removeBorrow(\AppBundle\Entity\Borrow $borrow)
-    {
+    public function removeBorrow(\AppBundle\Entity\Borrow $borrow) {
         $this->borrows->removeElement($borrow);
     }
 
@@ -230,8 +225,42 @@ class User
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBorrows()
-    {
+    public function getBorrows() {
         return $this->borrows;
     }
+
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     *
+     * @return User
+     */
+    public function setRoles($roles) {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Get roles
+     *
+     * @return array
+     */
+    public function getRoles() {
+        $roles = $this->roles;
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+        return array_unique($roles);
+    }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function getSalt() {
+        
+    }
+
 }
