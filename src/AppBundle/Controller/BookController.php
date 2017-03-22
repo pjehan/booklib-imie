@@ -92,7 +92,7 @@ class BookController extends Controller {
 
         $image = new File($this->getParameter('upload_dir') . '/' . $book->getImage());
         $book->setImage($image);
-        
+
         $editForm = $this->createForm('AppBundle\Form\BookType', $book);
         $editForm->handleRequest($request);
 
