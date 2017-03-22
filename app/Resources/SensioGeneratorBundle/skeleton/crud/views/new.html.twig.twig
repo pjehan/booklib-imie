@@ -1,17 +1,22 @@
 {% block extends %}
-{{ "{% extends 'base.html.twig' %}" }}
+{{ "{% extends 'admin/layout.html.twig' %}" }}
 {% endblock extends %}
 
 {% block body %}
 {{ "{% block body %}" }}
-    <h1>{{ entity_singularized|capitalize }} creation</h1>
+    <main class="container">
+        <h1>{{ entity_singularized|capitalize }} creation</h1>
 
-    {{ '{{ form_start(form) }}' }}
-        {{ '{{ form_widget(form) }}' }}
-        <input type="submit" value="Create" />
-    {{ '{{ form_end(form) }}' }}
+        {{ '{{ form_start(form) }}' }}
+            {{ '{{ form_widget(form) }}' }}
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-save"></i> 
+                Créer
+            </button>
+        {{ '{{ form_end(form) }}' }}
 
-{% set hide_edit, hide_delete = true, true %}
-{{ include('crud/views/others/record_actions.html.twig.twig') -}}
+    {% set hide_edit, hide_delete = true, true %}
+    {{ include('crud/views/others/record_actions.html.twig.twig') -}}
+    </main>
 {{ "{% endblock %}" }}
 {% endblock body %}

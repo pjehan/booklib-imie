@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/select2/css/select2.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}"/>
+{% endblock %}
+
 {% block title %}Administration{% endblock %}
 
 {% block header %}
@@ -21,6 +27,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{{ path('homepage') }}">Front</a></li>
                         <li><a href="{{ path('author_index') }}">Auteurs</a></li>
+                        <li><a href="{{ path('admin_book_index') }}">Livres</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -54,4 +61,10 @@
         </nav>
 
     </header>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
 {% endblock %}

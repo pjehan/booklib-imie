@@ -1,0 +1,55 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block body %}
+    <main class="container">
+        <h1>Book</h1>
+
+        <table>
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ book.id }}</td>
+                </tr>
+                <tr>
+                    <th>Title</th>
+                    <td>{{ book.title }}</td>
+                </tr>
+                <tr>
+                    <th>Reference</th>
+                    <td>{{ book.reference }}</td>
+                </tr>
+                <tr>
+                    <th>Image</th>
+                    <td>{{ book.image }}</td>
+                </tr>
+                <tr>
+                    <th>Synopsis</th>
+                    <td>{{ book.synopsis }}</td>
+                </tr>
+                <tr>
+                    <th>Createdat</th>
+                    <td>{% if book.createdAt %}{{ book.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Updatedat</th>
+                    <td>{% if book.updatedAt %}{{ book.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('admin_book_index') }}" class="btn btn-primary">
+    <i class="fa fa-arrow-left"></i> 
+    Retour à la liste
+</a>
+    <a href="{{ path('admin_book_edit', { 'id': book.id }) }}" class="btn btn-primary">
+        <i class="fa fa-edit"></i> 
+        Modifier
+    </a>    <div class="form-delete">
+        {{ form_start(delete_form) }}
+            <button type="submit" class="btn btn-danger">
+                <i class="fa fa-trash"></i> 
+                Supprimer
+            </button>
+        {{ form_end(delete_form) }}
+    </div></main>
+{% endblock %}

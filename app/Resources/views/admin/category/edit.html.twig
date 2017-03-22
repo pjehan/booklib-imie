@@ -1,0 +1,25 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block body %}
+    <main class="container">
+        <h1>Category edit</h1>
+
+        {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-save"></i> 
+                Modifier
+            </button>
+        {{ form_end(edit_form) }}
+
+                <a href="{{ path('admin_category_index') }}" class="btn btn-primary">
+    <i class="fa fa-arrow-left"></i> 
+    Retour à la liste
+</a>
+    {{ form_start(delete_form) }}
+        <button type="submit" class="btn btn-danger">
+            <i class="fa fa-trash"></i> 
+            Supprimer
+        </button>
+    {{ form_end(delete_form) }}</main>
+{% endblock %}

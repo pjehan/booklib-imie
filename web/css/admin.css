@@ -1,0 +1,11 @@
+form {
+    margin-bottom: 10px;
+}
+
+.form-delete {
+    display: inline-block;
+}
+
+table .table-actions-header {
+    width: 200px;
+}
