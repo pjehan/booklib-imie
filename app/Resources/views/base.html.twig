@@ -42,22 +42,43 @@
                                             <i class="fa fa-circle fa-stack-2x"></i>
                                             <i class="fa fa-user fa-green fa-stack-1x"></i>
                                         </span>
-                                        Mon Compte
+                                        {% if app.user %}
+                                            {{ app.user.username }}
+                                        {% else %}
+                                            Mon Compte
+                                        {% endif %}
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="{{ path('dashboard') }}">
-                                                <i class="fa fa-sign-in"></i>
-                                                Se connecter
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-user-plus"></i>
-                                                Créer un compte
-                                            </a>
-                                        </li>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <li>
+                                                <a href="{{ path('dashboard') }}">
+                                                    <i class="fa fa-superpowers"></i>
+                                                    Administration
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                        {% if not app.user %}
+                                            <li>
+                                                <a href="{{ path('login') }}">
+                                                    <i class="fa fa-sign-in"></i>
+                                                    Se connecter
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('user_registration') }}">
+                                                    <i class="fa fa-user-plus"></i>
+                                                    Créer un compte
+                                                </a>
+                                            </li>
+                                        {% else %}
+                                            <li>
+                                                <a href="{{ path('logout') }}">
+                                                    <i class="fa fa-sign-out"></i>
+                                                    Se déconnecter
+                                                </a>
+                                            </li>
+                                        {% endif %}
                                     </ul>
                                 </li>
                             </ul>

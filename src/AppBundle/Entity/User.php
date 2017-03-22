@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -57,6 +58,12 @@ class User implements UserInterface{
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
+    
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @var array
@@ -189,6 +196,14 @@ class User implements UserInterface{
      */
     public function getPassword() {
         return $this->password;
+    }
+    
+    function getPlainPassword() {
+        return $this->plainPassword;
+    }
+
+    function setPlainPassword($plainPassword) {
+        $this->plainPassword = $plainPassword;
     }
 
     /**
