@@ -5,29 +5,29 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Book;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Book controller.
  *
  * @Route("admin/book")
  */
-class BookController extends Controller
-{
+class BookController extends Controller {
+
     /**
      * Lists all book entities.
      *
      * @Route("/", name="admin_book_index")
      * @Method("GET")
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $books = $em->getRepository('AppBundle:Book')->findAll();
 
         return $this->render('admin/book/index.html.twig', array(
-            'books' => $books,
+                    'books' => $books,
         ));
     }
 
@@ -37,13 +37,21 @@ class BookController extends Controller
      * @Route("/new", name="admin_book_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
-    {
+    public function newAction(Request $request) {
         $book = new Book();
         $form = $this->createForm('AppBundle\Form\BookType', $book);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /* @var $file \Symfony\Component\HttpFoundation\File\UploadedFile */
+            $file = $book->getImage();
+
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+            $file->move($this->getParameter('upload_dir'), $fileName);
+
+            $book->setImage($fileName);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($book);
             $em->flush($book);
@@ -52,8 +60,8 @@ class BookController extends Controller
         }
 
         return $this->render('admin/book/new.html.twig', array(
-            'book' => $book,
-            'form' => $form->createView(),
+                    'book' => $book,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -63,13 +71,12 @@ class BookController extends Controller
      * @Route("/{id}", name="admin_book_show")
      * @Method("GET")
      */
-    public function showAction(Book $book)
-    {
+    public function showAction(Book $book) {
         $deleteForm = $this->createDeleteForm($book);
 
         return $this->render('admin/book/show.html.twig', array(
-            'book' => $book,
-            'delete_form' => $deleteForm->createView(),
+                    'book' => $book,
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -79,8 +86,7 @@ class BookController extends Controller
      * @Route("/{id}/edit", name="admin_book_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Book $book)
-    {
+    public function editAction(Request $request, Book $book) {
         $deleteForm = $this->createDeleteForm($book);
         $editForm = $this->createForm('AppBundle\Form\BookType', $book);
         $editForm->handleRequest($request);
@@ -92,9 +98,9 @@ class BookController extends Controller
         }
 
         return $this->render('admin/book/edit.html.twig', array(
-            'book' => $book,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'book' => $book,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -104,8 +110,7 @@ class BookController extends Controller
      * @Route("/{id}", name="admin_book_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Book $book)
-    {
+    public function deleteAction(Request $request, Book $book) {
         $form = $this->createDeleteForm($book);
         $form->handleRequest($request);
 
@@ -125,12 +130,12 @@ class BookController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Book $book)
-    {
+    private function createDeleteForm(Book $book) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_book_delete', array('id' => $book->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
+                        ->setAction($this->generateUrl('admin_book_delete', array('id' => $book->getId())))
+                        ->setMethod('DELETE')
+                        ->getForm()
         ;
     }
+
 }

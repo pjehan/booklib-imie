@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class BookType extends AbstractType {
 
@@ -15,7 +16,7 @@ class BookType extends AbstractType {
         $builder
                 ->add('title')
                 ->add('reference')
-                ->add('image')
+                ->add('image', FileType::class)
                 ->add('synopsis')
                 ->add('author')
                 ->add('categories')
