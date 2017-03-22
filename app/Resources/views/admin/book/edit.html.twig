@@ -5,22 +5,29 @@
         <h1>Book edit</h1>
 
         {{ form_start(edit_form) }}
+        
+        <img src="{{ asset('uploads/' ~ edit_form.vars.value.image.filename) }}">
+        
             {{ form_widget(edit_form) }}
+
             <button type="submit" class="btn btn-success">
                 <i class="fa fa-save"></i> 
                 Modifier
             </button>
+            
         {{ form_end(edit_form) }}
 
-                <a href="{{ path('admin_book_index') }}" class="btn btn-primary">
-    <i class="fa fa-arrow-left"></i> 
-    Retour à la liste
-</a>    <div class="form-delete">
-        {{ form_start(delete_form) }}
+        <a href="{{ path('admin_book_index') }}" class="btn btn-primary">
+            <i class="fa fa-arrow-left"></i> 
+            Retour à la liste
+        </a>    
+
+        <div class="form-delete">
+            {{ form_start(delete_form) }}
             <button type="submit" class="btn btn-danger">
                 <i class="fa fa-trash"></i> 
                 Supprimer
             </button>
-        {{ form_end(delete_form) }}
-    </div></main>
-{% endblock %}
+            {{ form_end(delete_form) }}
+        </div></main>
+    {% endblock %}

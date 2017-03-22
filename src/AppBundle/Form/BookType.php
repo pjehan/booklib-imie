@@ -16,7 +16,9 @@ class BookType extends AbstractType {
         $builder
                 ->add('title')
                 ->add('reference')
-                ->add('image', FileType::class)
+                ->add('image', FileType::class, array(
+                    'required' => false
+                ))
                 ->add('synopsis')
                 ->add('author')
                 ->add('categories')

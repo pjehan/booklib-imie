@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Book controller.
@@ -88,6 +89,10 @@ class BookController extends Controller {
      */
     public function editAction(Request $request, Book $book) {
         $deleteForm = $this->createDeleteForm($book);
+
+        $image = new File($this->getParameter('upload_dir') . '/' . $book->getImage());
+        $book->setImage($image);
+        
         $editForm = $this->createForm('AppBundle\Form\BookType', $book);
         $editForm->handleRequest($request);
 
@@ -100,7 +105,7 @@ class BookController extends Controller {
         return $this->render('admin/book/edit.html.twig', array(
                     'book' => $book,
                     'edit_form' => $editForm->createView(),
-                    'delete_form' => $deleteForm->createView(),
+                    'delete_form' => $deleteForm->createView()
         ));
     }
 
