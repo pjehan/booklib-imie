@@ -52,7 +52,10 @@ class BookController extends Controller {
             $file->move($this->getParameter('upload_dir'), $fileName);
 
             $book->setImage($fileName);
-
+            
+            $slugger = $this->get('app.slugger');
+            $book->setSlug($slugger->slugify($book->getReference() . '-' . $book->getTitle()));
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($book);
             $em->flush($book);

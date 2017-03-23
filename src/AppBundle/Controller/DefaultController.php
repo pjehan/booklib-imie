@@ -23,7 +23,7 @@ class DefaultController extends Controller {
     }
 
     /**
-     * @Route("/book/{id}", name="show_book")
+     * @Route("/book/{slug}", name="show_book")
      */
     public function showBookAction(\AppBundle\Entity\Book $book) {
         return $this->render('book/show.html.twig', [

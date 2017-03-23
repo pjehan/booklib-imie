@@ -8,6 +8,6 @@
                 <span class="label label-success"><i class="fa fa-tag"></i> {{ category.name }}</span>
             {% endfor %}
         </div>
-            <p><a href="{{ path('show_book', {'id': book.id}) }}" class="btn btn-primary" role="button"><i class="fa fa-eye"></i> Voir plus</a></p>
+            <p><a href="{{ path('show_book', {'slug': book.slug}) }}" class="btn btn-primary" role="button"><i class="fa fa-eye"></i> Voir plus</a></p>
     </div>
 </div>
